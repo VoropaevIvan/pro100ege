@@ -8,6 +8,8 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ('id', 'content', 'author', 'source', 'answer', 'topic', 'time_create', 'difficulty_level',
                   'is_available_in_bank', 'time_update')
+        fields = '__all__'
+        depth = 2
 
 
 
@@ -16,7 +18,7 @@ class TaskSerializerForUser(serializers.ModelSerializer):
         model = Task
         fields = ('id', 'content', 'author', 'source', 'answer', 'topic', 'time_create', 'difficulty_level',
                   'time_update')
-        fields = ('id', 'content', 'author')
+        fields = ('id', 'content', 'author', 'exam', 'number_in_exam')
         depth = 2
 
 

@@ -9,7 +9,8 @@ const Menu = () => {
           <NavLink to="/" end>
             Главная
           </NavLink>
-          <NavLink to="/test">Тест</NavLink>
+          <NavLink to="/bank/">Банк задач</NavLink>
+          <NavLink to="/test/">Тест</NavLink>
           <NavLink></NavLink>
         </nav>
       </div>

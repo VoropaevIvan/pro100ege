@@ -1,9 +1,10 @@
 import datetime
 import pytz
 from django.db.models import Count
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse, inline_serializer
 
-from rest_framework import viewsets
+from rest_framework import viewsets, serializers
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -26,10 +27,15 @@ class TaskViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
-    @extend_schema(description='Get tasks filtered by authors, sources, topics, create time. Ordering by create time.')
+    @extend_schema(description='''Get tasks filtered by authors, sources, topics, create time. Ordering by create time. 
+    Params: authors, sources, topics, d_levels, period(day, week, month).''')
     @action(detail=False, methods=['get'])
     def filtered(self, request):
         tasks = Task.objects.all().filter(is_available_in_bank=True)
+        if 'exam' in request.data:
+            tasks = tasks.filter(exam_id__in=request.data['exam'])
+        if 'numbers_in_exam' in request.data:
+            tasks = tasks.filter(number_in_exam_id__in=request.data['numbers_in_exam'])
         if 'authors' in request.data:
             tasks = tasks.filter(author_id__in=request.data['authors'])
         if 'sources' in request.data:
