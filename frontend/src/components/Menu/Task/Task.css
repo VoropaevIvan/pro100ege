@@ -31,8 +31,32 @@ div.task-container {
   border-bottom: 1px solid grey;
   border-top: 1px solid grey;
 }
-
 .task-container .task-footer {
+  border-radius: 0dvh 0dvh 1dvh 1dvh;
+  overflow: hidden;
+}
+.task-container .task-footer .floor {
+  border-top: 1px solid grey;
+}
+.floor .likes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.floor .like,
+.dislike {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-size: 0.8rem;
+  color: grey;
+}
+.floor .like,
+.dislike:hover {
+  cursor: pointer;
+}
+
+.task-container .task-footer .answer {
   border-radius: 0dvh 0dvh 1dvh 1dvh;
   padding: 10px;
 
@@ -40,6 +64,13 @@ div.task-container {
   justify-content: space-between;
   align-items: center;
 }
+
+.task-container .task-footer .floor {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 .task-container .task-footer .input-with-but {
   display: flex;
   flex-wrap: wrap;
@@ -129,4 +160,8 @@ div.task-container {
 }
 .solved-wa .task-header {
   background-color: #ffb1b1;
+}
+
+div.innerhtml div {
+  background-color: white;
 }
